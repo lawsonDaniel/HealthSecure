@@ -120,7 +120,7 @@ export default function HealthcareLandingPage() {
               <button className="inline-flex items-center justify-center whitespace-nowrap rounded-2xl cursor-pointer transition-all duration-300 h-10 px-6 bg-transparent border border-gray-600 text-gray-400 hover:border-blue-500 hover:text-white font-medium text-sm">
                 View Solutions
               </button>
-              <a className="inline-flex items-center justify-center whitespace-nowrap rounded-2xl cursor-pointer transition-all duration-300 h-10 px-6 bg-blue-600 text-white hover:bg-blue-700 font-medium text-sm" href="#contact">
+              <a className="inline-flex items-center justify-center whitespace-nowrap rounded-2xl cursor-pointer transition-all duration-300 h-10 px-6 bg-blue-600 text-white hover:bg-blue-700 font-medium text-sm" href="/login">
                 Get Started
               </a>
             </div>

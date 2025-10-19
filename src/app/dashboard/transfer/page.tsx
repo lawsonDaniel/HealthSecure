@@ -7,17 +7,13 @@ import { ethers } from 'ethers';
 // Contract addresses
 const MEDICAL_RECORDS_ADDRESS = ethers.getAddress('0x96081A4b38AcBbc4dAAbc72178AF8C2818DC9652');
 const HEALTH_CONSENT_ADDRESS = ethers.getAddress('0x3fcb10a808Cb6F90DD7027Ac765Eeb75Bd5f6157');
-const MEDICAL_RECORD_ACCESS_ADDRESS = ethers.getAddress('0xC379206a95B6bb841ac97F4ff15927218465694C');
+const MEDICAL_RECORD_ACCESS_ADDRESS = ethers.getAddress('0xB0a0F736787BBb0Dcce03E0b2DAae59d008B9D2b');
 
-// Contract ABIs
+// Contract ABIs (same as provided, included for completeness)
 const MEDICAL_RECORDS_ABI = [
   {
     inputs: [
-      {
-        internalType: "address",
-        name: "_healthConsentAddress",
-        type: "address"
-      }
+      { internalType: "address", name: "_healthConsentAddress", type: "address" }
     ],
     stateMutability: "nonpayable",
     type: "constructor"
@@ -25,24 +21,9 @@ const MEDICAL_RECORDS_ABI = [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "patient",
-        type: "address"
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "authorized",
-        type: "address"
-      },
-      {
-        indexed: false,
-        internalType: "string",
-        name: "ipfsCid",
-        type: "string"
-      }
+      { indexed: true, internalType: "address", name: "patient", type: "address" },
+      { indexed: true, internalType: "address", name: "authorized", type: "address" },
+      { indexed: false, internalType: "string", name: "ipfsCid", type: "string" }
     ],
     name: "AccessGranted",
     type: "event"
@@ -50,83 +31,40 @@ const MEDICAL_RECORDS_ABI = [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "patient",
-        type: "address"
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "timestamp",
-        type: "uint256"
-      },
-      {
-        indexed: false,
-        internalType: "string",
-        name: "ipfsCid",
-        type: "string"
-      }
+      { indexed: true, internalType: "address", name: "patient", type: "address" },
+      { indexed: false, internalType: "uint256", name: "timestamp", type: "uint256" },
+      { indexed: false, internalType: "string", name: "ipfsCid", type: "string" }
     ],
     name: "RecordUploaded",
     type: "event"
   },
   {
     inputs: [
-      {
-        internalType: "string",
-        name: "_ipfsCid",
-        type: "string"
-      }
+      { internalType: "string", name: "_ipfsCid", type: "string" }
     ],
     name: "getKeyShare",
     outputs: [
-      {
-        internalType: "bytes",
-        name: "",
-        type: "bytes"
-      }
+      { internalType: "bytes", name: "", type: "bytes" }
     ],
     stateMutability: "view",
     type: "function"
   },
   {
     inputs: [
-      {
-        internalType: "address",
-        name: "_patient",
-        type: "address"
-      }
+      { internalType: "address", name: "_patient", type: "address" }
     ],
     name: "getRecords",
     outputs: [
-      {
-        internalType: "string[]",
-        name: "",
-        type: "string[]"
-      }
+      { internalType: "string[]", name: "", type: "string[]" }
     ],
     stateMutability: "view",
     type: "function"
   },
   {
     inputs: [
-      {
-        internalType: "address",
-        name: "_authorized",
-        type: "address"
-      },
-      {
-        internalType: "string",
-        name: "_ipfsCid",
-        type: "string"
-      },
-      {
-        internalType: "bytes",
-        name: "_encryptedKeyShare",
-        type: "bytes"
-      }
+      { internalType: "address", name: "_authorized", type: "address" },
+      { internalType: "string", name: "_ipfsCid", type: "string" },
+      { internalType: "bytes", name: "_encryptedKeyShare", type: "bytes" }
     ],
     name: "grantAccess",
     outputs: [],
@@ -137,35 +75,19 @@ const MEDICAL_RECORDS_ABI = [
     inputs: [],
     name: "healthConsent",
     outputs: [
-      {
-        internalType: "contract IHealthConsent",
-        name: "",
-        type: "address"
-      }
+      { internalType: "contract IHealthConsent", name: "", type: "address" }
     ],
     stateMutability: "view",
     type: "function"
   },
   {
     inputs: [
-      {
-        internalType: "string",
-        name: "_ipfsCid",
-        type: "string"
-      },
-      {
-        internalType: "bytes",
-        name: "_selfEncryptedKeyShare",
-        type: "bytes"
-      }
+      { internalType: "string", name: "_ipfsCid", type: "string" },
+      { internalType: "bytes", name: "_selfEncryptedKeyShare", type: "bytes" }
     ],
     name: "uploadRecord",
     outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool"
-      }
+      { internalType: "bool", name: "", type: "bool" }
     ],
     stateMutability: "nonpayable",
     type: "function"
@@ -175,29 +97,13 @@ const MEDICAL_RECORDS_ABI = [
 const HEALTH_CONSENT_ABI = [
   {
     inputs: [
-      {
-        internalType: "address",
-        name: "_patient",
-        type: "address"
-      }
+      { internalType: "address", name: "_patient", type: "address" }
     ],
     name: "getConsent",
     outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool"
-      },
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      },
-      {
-        internalType: "string",
-        name: "",
-        type: "string"
-      }
+      { internalType: "bool", name: "", type: "bool" },
+      { internalType: "uint256", name: "", type: "uint256" },
+      { internalType: "string", name: "", type: "string" }
     ],
     stateMutability: "view",
     type: "function"
@@ -321,16 +227,76 @@ const MEDICAL_RECORD_ACCESS_ABI = [
   }
 ];
 
-// Success Modal Component
+// Derive encryption key (copied from Dashboard for consistency)
+const deriveEncryptionKey = async (timestamp: number, targetWalletAddress: string): Promise<Uint8Array> => {
+  if (!window.ethereum) {
+    throw new Error('No Web3 wallet detected. Please install MetaMask.');
+  }
+
+  try {
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+    
+    // Recreate the exact same message used during upload
+    const message = `HealthSecure: Generate encryption key for ${targetWalletAddress} at ${timestamp}`;
+    
+    console.log('Deriving key with message:', message);
+    
+    // Sign the same message to regenerate the same signature
+    const signature = await signer.signMessage(message);
+    console.log('Signature obtained for key derivation');
+    
+    // Use the signature to derive the same 256-bit key using PBKDF2
+    const signatureBuffer = new TextEncoder().encode(signature);
+    const salt = new TextEncoder().encode('healthsecure-salt');
+    
+    // Import key for derivation
+    const baseKey = await crypto.subtle.importKey(
+      'raw',
+      signatureBuffer,
+      'PBKDF2',
+      false,
+      ['deriveBits', 'deriveKey']
+    );
+    
+    // Derive 256-bit key (same parameters as upload)
+    const derivedBits = await crypto.subtle.deriveBits(
+      {
+        name: 'PBKDF2',
+        salt: salt,
+        iterations: 100000,
+        hash: 'SHA-256'
+      },
+      baseKey,
+      256 // 256 bits = 32 bytes for AES-256
+    );
+    
+    const key = new Uint8Array(derivedBits);
+    console.log('Key derived successfully, length:', key.length, 'bytes');
+    
+    if (key.length !== 32) {
+      throw new Error(`Invalid key length: ${key.length} bytes, expected 32 bytes`);
+    }
+    
+    return key;
+  } catch (err) {
+    console.error('Key derivation error:', err);
+    throw new Error(`Failed to derive encryption key: ${err instanceof Error ? err.message : 'Unknown error'}`);
+  }
+};
+
+// Success Modal Component (unchanged)
 const TransferSuccess = ({ txHash, grantee, ipfsCid, onClose }) => {
+  const [showInstructions, setShowInstructions] = useState(false);
+
   return (
     <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="bg-gray-900 rounded-xl max-w-md w-full border border-gray-700"
+        className="bg-gray-900 rounded-xl max-w-2xl w-full border border-gray-700 max-h-[90vh] overflow-y-auto"
       >
-        <div className="p-6 text-center">
+        <div className="p-6">
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
@@ -339,14 +305,19 @@ const TransferSuccess = ({ txHash, grantee, ipfsCid, onClose }) => {
           >
             <CheckCircle className="w-10 h-10 text-green-500" />
           </motion.div>
-          <h3 className="text-xl font-semibold text-white mb-2">Access Granted Successfully!</h3>
-          <p className="text-gray-300 text-sm mb-6">
-            Access to your medical record has been securely granted on the BlockDAG blockchain.
+          
+          <h3 className="text-xl font-semibold text-white mb-2 text-center">
+            Access Granted Successfully!
+          </h3>
+          
+          <p className="text-gray-300 text-sm mb-6 text-center">
+            The grantee can now access the encrypted medical record using their wallet.
           </p>
-          <div className="bg-gray-800 p-4 rounded-lg mb-4 text-left space-y-3">
+
+          <div className="bg-gray-800 p-4 rounded-lg mb-4 space-y-3">
             <div>
               <p className="text-gray-400 text-xs font-medium mb-1">STATUS:</p>
-              <p className="text-green-400 text-sm font-medium">✓ Transaction mined and executed</p>
+              <p className="text-green-400 text-sm font-medium">✓ Transaction confirmed on BlockDAG</p>
             </div>
             <div>
               <p className="text-gray-400 text-xs font-medium mb-1">TRANSACTION HASH:</p>
@@ -361,16 +332,67 @@ const TransferSuccess = ({ txHash, grantee, ipfsCid, onClose }) => {
               <p className="text-white font-mono text-xs break-all">{ipfsCid}</p>
             </div>
             <div>
-              <p className="text-gray-400 text-xs font-medium mb-1">TIMESTAMP:</p>
-              <p className="text-gray-300 text-xs">{new Date().toLocaleString()}</p>
+              <p className="text-gray-400 text-xs font-medium mb-1">ENCRYPTED FILE:</p>
+              <a
+                href={`https://gateway.pinata.cloud/ipfs/${ipfsCid}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-blue-300 text-xs break-all underline"
+              >
+                https://gateway.pinata.cloud/ipfs/{ipfsCid}
+              </a>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg transition-colors font-medium"
-          >
-            Close
-          </button>
+
+          <div className="mb-6">
+            <button
+              onClick={() => setShowInstructions(!showInstructions)}
+              className="w-full bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors font-medium flex items-center justify-between"
+            >
+              <span>View Access Instructions for Grantee</span>
+              <span>{showInstructions ? '▲' : '▼'}</span>
+            </button>
+            
+            {showInstructions && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                className="mt-3 bg-gray-700 p-4 rounded-lg text-sm"
+              >
+                <p className="text-gray-300 mb-2">
+                  <strong>To access the file, the grantee should:</strong>
+                </p>
+                <ol className="list-decimal list-inside space-y-1 text-gray-300">
+                  <li>Connect their wallet to HealthSecure</li>
+                  <li>Visit the "Access Records" page</li>
+                  <li>Select your patient address</li>
+                  <li>Enter the IPFS CID: <code className="bg-gray-800 px-1 rounded">{ipfsCid}</code></li>
+                  <li>Click "Decrypt and Download"</li>
+                </ol>
+                <p className="text-gray-400 text-xs mt-2">
+                  The system will automatically verify access permissions and decrypt the file.
+                </p>
+              </motion.div>
+            )}
+          </div>
+
+          <div className="flex gap-3">
+            <button
+              onClick={onClose}
+              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg transition-colors font-medium"
+            >
+              Close
+            </button>
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText(ipfsCid);
+                // Show copied notification
+              }}
+              className="flex-1 bg-gray-600 hover:bg-gray-700 text-white py-3 px-4 rounded-lg transition-colors font-medium"
+            >
+              Copy CID
+            </button>
+          </div>
         </div>
       </motion.div>
     </div>
@@ -443,7 +465,7 @@ export default function TransferPage() {
     initialize();
   }, []);
 
-  // Fetch user's medical records with better error handling
+  // Fetch user's medical records
   const fetchRecords = async (address: string) => {
     setFetchingRecords(true);
     setError('');
@@ -467,9 +489,9 @@ export default function TransferPage() {
       const userRecords = await contract.getRecords(address);
       console.log('Raw records from contract:', userRecords);
       
-      // Filter out empty strings and validate CIDs
+      // Filter out invalid CIDs
       const validRecords = userRecords.filter((cid: string) => 
-        cid && cid.length > 0 && cid !== '0x'
+        cid && cid.length > 0 && cid !== '0x' && cid.startsWith('bafy')
       );
       
       console.log('Valid records:', validRecords);
@@ -480,17 +502,17 @@ export default function TransferPage() {
       }
 
       if (validRecords.length === 0) {
-        setError('No medical records found for your wallet address.');
+        setError('No medical records found for your wallet address. Please upload a record first.');
       }
     } catch (error) {
       console.error('Error fetching records:', error);
       let errorMessage = 'Failed to fetch medical records. ';
       
-      if (error.message.includes('contract not found')) {
+      if (error.message?.includes('contract not found')) {
         errorMessage += 'Contract not deployed. ';
-      } else if (error.message.includes('network')) {
+      } else if (error.message?.includes('network')) {
         errorMessage += 'Network error. ';
-      } else if (error.message.includes('revert')) {
+      } else if (error.message?.includes('revert')) {
         errorMessage += 'Contract execution reverted. ';
       }
       
@@ -501,109 +523,127 @@ export default function TransferPage() {
     }
   };
 
-  // Get the encryption key for a specific CID
-const getEncryptionKeyForCid = async (cid: string): Promise<string> => {
-  try {
-    // Check sessionStorage first
-    const storedKey = sessionStorage.getItem(`encryptionKey_${cid}`);
-    if (storedKey) {
-      console.log('Found encryption key in session storage for CID:', cid);
-      return storedKey;
-    }
+  // Retrieve encryption key for CID
+  const getEncryptionKeyForCid = async (cid: string): Promise<string> => {
+    try {
+      // Try to get key material from session storage
+      const storedKeyMaterial = sessionStorage.getItem(`encryptionKey_${cid}`);
+      if (!storedKeyMaterial) {
+        throw new Error(`No encryption key found for CID ${cid} in session storage.`);
+      }
 
-    // Verify record exists in contract
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    const medicalRecordsContract = new ethers.Contract(MEDICAL_RECORDS_ADDRESS, MEDICAL_RECORDS_ABI, provider);
-    const patientRecords = await medicalRecordsContract.getRecords(walletAddress);
-    const recordExists = patientRecords.some((record: string) => record === cid);
-    if (!recordExists) {
-      throw new Error(`Record with CID ${cid} not found for patient ${walletAddress}. Please ensure it was uploaded with this wallet.`);
-    }
+      let keyMaterial;
+      try {
+        keyMaterial = JSON.parse(storedKeyMaterial);
+      } catch (parseError) {
+        console.error('Error parsing key material:', parseError);
+        throw new Error('Invalid key material format in session storage.');
+      }
 
-    // Try fetching key share from contract
-    console.log('Fetching key share from contract for CID:', cid);
-    const keyShare = await medicalRecordsContract.getKeyShare(cid);
-    if (keyShare && keyShare !== '0x') {
-      const keyHex = ethers.hexlify(keyShare);
-      console.log('Retrieved key share from contract:', keyHex);
-      sessionStorage.setItem(`encryptionKey_${cid}`, keyHex);
+      if (!keyMaterial || !keyMaterial.walletAddress || !keyMaterial.timestamp) {
+        throw new Error('Invalid key material: missing walletAddress or timestamp.');
+      }
+
+      console.log('Key material found:', keyMaterial);
+
+      // Verify the wallet address matches
+      const normalizedWallet = ethers.getAddress(keyMaterial.walletAddress);
+      if (normalizedWallet.toLowerCase() !== walletAddress.toLowerCase()) {
+        throw new Error('Wallet mismatch: the record was uploaded by a different wallet.');
+      }
+
+      // Derive the key using the stored timestamp and wallet address
+      const timestamp = parseInt(keyMaterial.timestamp);
+      if (isNaN(timestamp)) {
+        throw new Error('Invalid timestamp in key material.');
+      }
+
+      const key = await deriveEncryptionKey(timestamp, normalizedWallet);
+      const keyHex = '0x' + Buffer.from(key).toString('hex');
+      console.log('Derived key hex:', keyHex);
+
+      // Store the derived key hex for future use
+      sessionStorage.setItem(`encryptionKey_${cid}`, JSON.stringify({
+        walletAddress: normalizedWallet,
+        timestamp: timestamp,
+        keyHex: keyHex
+      }));
+
       return keyHex;
-    }
+    } catch (error) {
+      console.error('Error getting encryption key:', error);
 
-    // Fallback: Regenerate key if user is the patient
-    const signer = await provider.getSigner();
-    const connectedAddress = await signer.getAddress();
-    const normalizedAddress = ethers.getAddress(connectedAddress);
-    const timestamp = sessionStorage.getItem(`uploadTimestamp_${cid}`);
-    if (normalizedAddress.toLowerCase() === walletAddress.toLowerCase() && timestamp) {
-      console.log('Regenerating key for CID:', cid);
-      const message = `HealthSecure: Generate encryption key for ${walletAddress} at ${timestamp}`;
-      const signature = await signer.signMessage(message);
-      const signatureBuffer = new TextEncoder().encode(signature);
-      const salt = new TextEncoder().encode('healthsecure-salt');
-      const baseKey = await crypto.subtle.importKey(
-        'raw',
-        signatureBuffer,
-        'PBKDF2',
-        false,
-        ['deriveBits']
-      );
-      const derivedBits = await crypto.subtle.deriveBits(
-        {
-          name: 'PBKDF2',
-          salt: salt,
-          iterations: 100000,
-          hash: 'SHA-256'
-        },
-        baseKey,
-        256
-      );
-      const key = new Uint8Array(derivedBits);
-      const keyHex = ethers.hexlify(key);
-      sessionStorage.setItem(`encryptionKey_${cid}`, keyHex);
-      return keyHex;
+      // Try to fetch from contract as a fallback
+      try {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const contract = new ethers.Contract(MEDICAL_RECORDS_ADDRESS, MEDICAL_RECORDS_ABI, provider);
+        const keyShare = await contract.getKeyShare(cid);
+        
+        if (keyShare && keyShare !== '0x') {
+          const keyHex = ethers.hexlify(keyShare);
+          console.log('Retrieved key share from contract:', keyHex);
+          
+          // Store in session storage for future use
+          sessionStorage.setItem(`encryptionKey_${cid}`, JSON.stringify({
+            walletAddress: walletAddress,
+            timestamp: Date.now(),
+            keyHex: keyHex
+          }));
+          return keyHex;
+        }
+        
+        throw new Error('No key share found in contract.');
+      } catch (contractError) {
+        console.error('Contract key retrieval failed:', contractError);
+        throw new Error(`Failed to retrieve encryption key: ${error.message || 'Unknown error'}`);
+      }
     }
+  };
 
-    throw new Error('No encryption key found for this record. Ensure you are the patient who uploaded it.');
-  } catch (error) {
-    console.error('Error getting encryption key:', error);
-    let errorMessage = 'Failed to retrieve encryption key.';
-    if (error.reason === 'No access to this record') {
-      errorMessage = 'You do not have access to this record’s encryption key. Ensure you are using the wallet that uploaded the record.';
-    } else if (error.message.includes('Record with CID')) {
-      errorMessage = error.message;
-    } else {
-      errorMessage = `Failed to retrieve encryption key: ${error.reason || error.message}`;
-    }
-    throw new Error(errorMessage);
-  }
-};
-const verifyRecordExists = async (cid: string, patientAddress: string): Promise<boolean> => {
+  // Verify CID ownership
+  async function verifyCidOwnership(cid: string, patientAddress: string): Promise<boolean> {
   try {
     const provider = new ethers.BrowserProvider(window.ethereum);
     const contract = new ethers.Contract(MEDICAL_RECORDS_ADDRESS, MEDICAL_RECORDS_ABI, provider);
     
+    // Check if CID exists in patient's records
+    console.log(`Verifying CID ${cid} for patient ${patientAddress}`);
     const records = await contract.getRecords(patientAddress);
-    console.log('All records for patient:', records);
-    console.log('Looking for CID:', cid);
+    console.log('Records for patient:', records);
     
-    const exists = records.some((record: string) => record === cid);
-    console.log('Record exists:', exists);
-    
-    return exists;
+    const recordExists = records.includes(cid);
+    if (!recordExists) {
+      console.warn(`CID ${cid} not found in patient's records.`);
+      setError(`Record with CID ${cid} not found in your records. Please ensure it was uploaded correctly.`);
+      return false;
+    }
+
+    // Verify ownership via getKeyShare
+    try {
+      console.log(`Calling getKeyShare for CID ${cid}`);
+      const keyShare = await contract.getKeyShare(cid);
+      console.log('Key share retrieved:', keyShare);
+      return keyShare && keyShare !== '0x';
+    } catch (keyError) {
+      console.error('Error calling getKeyShare:', keyError);
+      setError(`Failed to retrieve key share: ${keyError.reason || keyError.message || 'No access to this record'}`);
+      return false;
+    }
   } catch (error) {
-    console.error('Error verifying record:', error);
+    console.error('Error in verifyCidOwnership:', error);
+    setError(`Failed to verify CID ownership: ${error.reason || error.message || 'Unknown error'}`);
     return false;
   }
-};
-  // Grant access to a grantee using the MedicalRecordAccess contract
+}
+
+  // Grant access to a record
   const handleGrantAccess = async () => {
   setLoading(true);
   setError('');
 
   try {
     if (typeof window.ethereum === 'undefined') {
-      throw new Error('No Web3 wallet detected. Please install MetaMask.');
+      throw new Error('No Web3 wallet detected.');
     }
 
     // Input validation
@@ -626,85 +666,100 @@ const verifyRecordExists = async (cid: string, patientAddress: string): Promise<
 
     // Verify consent
     const consentContract = new ethers.Contract(HEALTH_CONSENT_ADDRESS, HEALTH_CONSENT_ABI, provider);
-    const [hasSigned] = await consentContract.getConsent(normalizedAddress);
+    let hasSigned = false;
+    try {
+      console.log('Checking consent for address:', normalizedAddress);
+      [hasSigned] = await consentContract.getConsent(normalizedAddress);
+      console.log('Consent status:', hasSigned);
+    } catch (consentError) {
+      console.error('Consent check error:', consentError);
+      throw new Error(
+        `Failed to verify consent: ${
+          consentError.reason || consentError.message || 'Contract call reverted. Please ensure you have signed the consent.'
+        }`
+      );
+    }
+
     if (!hasSigned) {
       throw new Error('Consent not signed. Please sign consent in the dashboard.');
     }
 
-    // Verify the record exists for this patient
-    const medicalRecordsContract = new ethers.Contract(MEDICAL_RECORDS_ADDRESS, MEDICAL_RECORDS_ABI, provider);
-    const patientRecords = await medicalRecordsContract.getRecords(normalizedAddress);
-    
-    const recordExists = patientRecords.some((record: string) => record === selectedCid);
-    if (!recordExists) {
-      throw new Error('Selected record not found in your medical records. Please refresh and try again.');
+    // Verify record ownership
+    console.log('Verifying record ownership for CID:', selectedCid);
+    const isOwner = await verifyCidOwnership(selectedCid, normalizedAddress);
+    if (!isOwner) {
+      throw new Error(
+        `Record with CID ${selectedCid} not found or not owned by you. Please ensure the record was uploaded correctly or re-upload it from the dashboard.`
+      );
     }
 
-    // Get the encryption key for the selected CID
+    // Get encryption key
     console.log('Getting encryption key for CID:', selectedCid);
-    const encryptionKey = await getEncryptionKeyForCid(selectedCid);
-    
-    if (!encryptionKey) {
-      throw new Error('Encryption key not found for this record. Please ensure you are using the same wallet that uploaded the file.');
+    let encryptionKey = await getEncryptionKeyForCid(selectedCid);
+
+    // Ensure encryptionKey is a valid hex string
+    if (!encryptionKey.startsWith('0x')) {
+      encryptionKey = '0x' + encryptionKey;
+    }
+    if (!/^0x[0-9a-fA-F]+$/.test(encryptionKey)) {
+      throw new Error('Invalid encryption key format.');
     }
 
-    // Calculate expiration timestamp (0 for indefinite)
+    // Truncate or pad key to 32 bytes (64 hex chars + 0x)
+    const keyBytes = ethers.hexlify(ethers.toUtf8Bytes(encryptionKey)).padEnd(66, '0').slice(0, 66);
+
+    // Calculate expiration timestamp
     const expiration = parseInt(expirationDays) > 0 
       ? Math.floor(Date.now() / 1000) + parseInt(expirationDays) * 86400 
       : 0;
 
-    console.log('Granting access with parameters:', {
+    console.log('Grant access parameters:', {
       grantee: normalizedGrantee,
       cid: selectedCid,
       expiration,
-      keyLength: encryptionKey.length
+      keyBytes: keyBytes.substring(0, 20) + '...'
     });
 
-    // Use the MedicalRecordAccess contract
+    // Use MedicalRecordAccess contract
     const contract = new ethers.Contract(MEDICAL_RECORD_ACCESS_ADDRESS, MEDICAL_RECORD_ACCESS_ABI, signer);
-    
-    // Convert encryption key to bytes - FIXED: Use hex data instead of UTF-8
-    let encryptedKeyBytes;
-    try {
-      // If the key is already in hex format, use it directly
-      if (encryptionKey.startsWith('0x')) {
-        encryptedKeyBytes = encryptionKey;
-      } else {
-        // Otherwise, convert to hex
-        encryptedKeyBytes = ethers.hexlify(ethers.toUtf8Bytes(encryptionKey));
-      }
-    } catch (error) {
-      console.error('Error converting encryption key:', error);
-      throw new Error('Failed to process encryption key. Please try refreshing the page.');
-    }
 
-    // Estimate gas with proper error handling
-    let gasEstimate;
+    // Test static call
+    console.log('Testing static call...');
     try {
-      gasEstimate = await contract.grantAccess.estimateGas(
-        normalizedGrantee, 
-        selectedCid, 
-        expiration, 
-        encryptedKeyBytes,
+      await contract.grantAccess.staticCall(
+        normalizedGrantee,
+        selectedCid,
+        expiration,
+        keyBytes,
         { from: normalizedAddress }
       );
-    } catch (estimateError) {
-      console.error('Gas estimation failed:', estimateError);
-      throw new Error(`Gas estimation failed: ${estimateError.reason || estimateError.message}`);
+      console.log('Static call successful');
+    } catch (staticCallError) {
+      console.error('Static call failed:', staticCallError);
+      throw new Error(`Static call failed: ${staticCallError.reason || staticCallError.message || 'Unknown error'}`);
     }
-    
-    const gasLimit = (gasEstimate * 120n) / 100n; // Add 20% buffer
+
+    // Estimate gas
+    const gasEstimate = await contract.grantAccess.estimateGas(
+      normalizedGrantee,
+      selectedCid,
+      expiration,
+      keyBytes,
+      { from: normalizedAddress }
+    );
+    console.log('Gas estimate:', gasEstimate.toString());
+    const gasLimit = (gasEstimate * 120n) / 100n;
 
     // Send transaction
     console.log('Sending grantAccess transaction...');
     const tx = await contract.grantAccess(
-      normalizedGrantee, 
-      selectedCid, 
-      expiration, 
-      encryptedKeyBytes, 
+      normalizedGrantee,
+      selectedCid,
+      expiration,
+      keyBytes,
       { gasLimit }
     );
-    
+
     console.log('Transaction sent:', tx.hash);
     const receipt = await tx.wait();
 
@@ -717,28 +772,30 @@ const verifyRecordExists = async (cid: string, patientAddress: string): Promise<
     setShowSuccess(true);
     setGranteeAddress('');
     setExpirationDays('7');
-    
-    // Refresh records after successful transfer
+
+    // Refresh records
     await fetchRecords(walletAddress);
-    
+
   } catch (error) {
     console.error('Error granting access:', error);
     let errorMessage = 'Failed to grant access on blockchain.';
-    
+
     if (error.code === 4001) {
       errorMessage = 'Transaction rejected by user.';
     } else if (error.code === 'INSUFFICIENT_FUNDS') {
       errorMessage = 'Insufficient funds for gas. Please fund your wallet.';
     } else if (error.code === 'CALL_EXCEPTION') {
-      errorMessage = error.reason || 'Contract execution failed. Verify contract address and parameters.';
-    } else if (error.code === 'INVALID_ARGUMENT') {
-      errorMessage = 'Invalid input parameters. Check grantee address and IPFS CID.';
-    } else if (error.code === -32603) {
-      errorMessage = error.reason || 'Internal blockchain error. Try again or check network status.';
-    } else if (error.message) {
-      errorMessage = error.reason || error.message;
+      errorMessage = error.reason || 'Contract execution failed. Please check the CID, grantee address, and ensure the record exists.';
+    } else if (error.message.includes('Consent not signed')) {
+      errorMessage = error.message + ' Redirecting to dashboard...';
+      setTimeout(() => window.location.href = '/dashboard', 2000);
+    } else if (error.message.includes('not found or not owned')) {
+      errorMessage = error.message + ' Redirecting to upload page...';
+      setTimeout(() => window.location.href = '/dashboard/upload', 2000);
+    } else {
+      errorMessage = error.reason || error.message || 'Unknown error occurred.';
     }
-    
+
     setError(errorMessage);
   } finally {
     setLoading(false);
@@ -810,13 +867,13 @@ const verifyRecordExists = async (cid: string, patientAddress: string): Promise<
                   Upload Medical Records
                 </button>
               )}
-              {error.includes('Encryption key not found') && (
+              {error.includes('encryption key') && (
                 <button
                   onClick={handleRefreshRecords}
                   className="mt-2 bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1 rounded text-sm transition-colors flex items-center gap-2"
                 >
                   <RefreshCw className="w-4 h-4" />
-                  Refresh Keys
+                  Refresh Records
                 </button>
               )}
             </div>
