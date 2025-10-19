@@ -1,0 +1,39 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_28-edb59e1c3692e15de38d338d7d361fbe38046433",
+  "solcVersion": "0.8.28",
+  "solcLongVersion": "0.8.28+commit.7893614a",
+  "userSourceNameMap": {
+    "contracts/HealthConsent.sol": "project/contracts/HealthConsent.sol",
+    "contracts/MedicalRecords.sol": "project/contracts/MedicalRecords.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "london",
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers",
+            "metadata"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/HealthConsent.sol": {
+        "content": "// contracts/HealthConsent.sol\n// SPDX-License-Identifier: MIT\npragma solidity ^0.8.28;\n\ncontract HealthConsent {\n    struct Consent {\n        bool signed;\n        uint256 timestamp;\n        string consentHash;\n    }\n\n    mapping(address => Consent) private consents;\n\n    event ConsentSigned(address indexed patient, uint256 timestamp, string consentHash);\n\n    function signConsent(address _patient, string memory _consentHash) public returns (bool) {\n        require(msg.sender == _patient, \"Only the patient can sign their own consent\");\n        require(!consents[_patient].signed, \"Consent already signed\");\n\n        consents[_patient] = Consent({\n            signed: true,\n            timestamp: block.timestamp,\n            consentHash: _consentHash\n        });\n\n        emit ConsentSigned(_patient, block.timestamp, _consentHash);\n        return true;\n    }\n\n    function getConsent(address _patient) public view returns (bool, uint256, string memory) {\n        Consent memory consent = consents[_patient];\n        return (consent.signed, consent.timestamp, consent.consentHash);\n    }\n\n    \n}"
+      },
+      "project/contracts/MedicalRecords.sol": {
+        "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.28;\n\ninterface IHealthConsent {\n    function getConsent(address _patient) external view returns (bool, uint256, string memory);\n}\n\ncontract MedicalRecords {\n    // Reference to the HealthConsent contract\n    IHealthConsent public healthConsent;\n\n    // Event emitted when a record is uploaded\n    event RecordUploaded(address indexed patient, uint256 timestamp, string encryptedData);\n\n    // Mapping to store uploaded records (optional, for retrieval)\n    mapping(address => string[]) private patientRecords;\n\n    constructor(address _healthConsentAddress) {\n        require(_healthConsentAddress != address(0), \"Invalid consent contract address\");\n        healthConsent = IHealthConsent(_healthConsentAddress);\n    }\n\n    // Upload encrypted medical record\n    function uploadRecord(address _patient, string memory _encryptedData) public returns (bool) {\n        // Verify consent exists\n        (bool hasSigned, , ) = healthConsent.getConsent(_patient);\n        require(hasSigned, \"Consent not signed\");\n        require(_patient != address(0), \"Invalid patient address\");\n        require(bytes(_encryptedData).length > 0, \"Invalid encrypted data\");\n\n        // Store encrypted data (optional, can be removed for gas efficiency)\n        patientRecords[_patient].push(_encryptedData);\n\n        // Emit event for auditability\n        emit RecordUploaded(_patient, block.timestamp, _encryptedData);\n        return true;\n    }\n\n    // Retrieve patient's uploaded records (optional, for verification)\n    function getRecords(address _patient) public view returns (string[] memory) {\n        return patientRecords[_patient];\n    }\n}"
+      }
+    }
+  }
+}

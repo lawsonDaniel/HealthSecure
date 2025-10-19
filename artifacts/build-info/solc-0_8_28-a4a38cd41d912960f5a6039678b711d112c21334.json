@@ -1,0 +1,39 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_28-a4a38cd41d912960f5a6039678b711d112c21334",
+  "solcVersion": "0.8.28",
+  "solcLongVersion": "0.8.28+commit.7893614a",
+  "userSourceNameMap": {
+    "contracts/Counter.sol": "project/contracts/Counter.sol",
+    "contracts/HealthConsent.sol": "project/contracts/HealthConsent.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "london",
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers",
+            "metadata"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/Counter.sol": {
+        "content": "// SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.8.28;\n\ncontract Counter {\n  uint public x;\n\n  event Increment(uint by);\n\n  function inc() public {\n    x++;\n    emit Increment(1);\n  }\n\n  function incBy(uint by) public {\n    require(by > 0, \"incBy: increment should be positive\");\n    x += by;\n    emit Increment(by);\n  }\n}\n"
+      },
+      "project/contracts/HealthConsent.sol": {
+        "content": "// contracts/HealthConsent.sol\n// SPDX-License-Identifier: MIT\npragma solidity ^0.8.28;\n\ncontract HealthConsent {\n    struct Consent {\n        bool signed;\n        uint256 timestamp;\n        string consentHash;\n    }\n\n    mapping(address => Consent) private consents;\n\n    event ConsentSigned(address indexed patient, uint256 timestamp, string consentHash);\n\n    function signConsent(address _patient, string memory _consentHash) public returns (bool) {\n        require(msg.sender == _patient, \"Only the patient can sign their own consent\");\n        require(!consents[_patient].signed, \"Consent already signed\");\n\n        consents[_patient] = Consent({\n            signed: true,\n            timestamp: block.timestamp,\n            consentHash: _consentHash\n        });\n\n        emit ConsentSigned(_patient, block.timestamp, _consentHash);\n        return true;\n    }\n\n    function getConsent(address _patient) public view returns (bool, uint256, string memory) {\n        Consent memory consent = consents[_patient];\n        return (consent.signed, consent.timestamp, consent.consentHash);\n    }\n}"
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+Prototype Flow: User connects wallet → Signs consent smart contract on BlockDAG → Uploads/shares encrypted record → AI analyzes (e.g., mock disease prediction) → Secure transfer to recipient.
